@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VERDANT CLASH — Season 3 Championship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#050e08;
+    --bg-1:#0a1a10;
+    --bg-2:#0f2617;
+    --line:#1e3d27;
+    --leaf:#37c65e;
+    --leaf-bright:#7dffa8;
+    --leaf-glow:rgba(125,255,168,.45);
+    --text-hi:#eafcf0;
+    --text-lo:#7fa38c;
+    --gold:#e2a63b;
+    --gold-bright:#ffd479;
+    --gold-glow:rgba(255,212,121,.4);
+    --gold-dim:#7a5a24;
+    --danger:#ff5c6c;
+
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 88% -8%, #123d21 0%, transparent 58%),
+      radial-gradient(900px 500px at -10% 15%, #0f2c1a 0%, transparent 55%),
+      linear-gradient(var(--bg-0),var(--bg-0));
+    color:var(--text-hi);
+    font-family:'Chakra Petch',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* circuit grid backdrop */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(rgba(55,198,94,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(55,198,94,.06) 1px, transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 10%, transparent 75%);
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 10%, transparent 75%);
+    pointer-events:none;z-index:0;
+  }
+  .wrap{position:relative;z-index:1;}
+  section, nav, footer, .hero{position:relative;z-index:1;}
+
+  @keyframes pulse-dot{
+    0%,100%{opacity:1;box-shadow:0 0 0 0 var(--leaf-glow);}
+    50%{opacity:.55;box-shadow:0 0 0 6px transparent;}
+  }
+  @keyframes scan{
+    0%{transform:translateY(-100%);}
+    100%{transform:translateY(100%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important;}
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;
+    padding-top:calc(20px + env(safe-area-inset-top,0px));
+    max-width:1120px;margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:19px;letter-spacing:.5px;text-transform:uppercase;}
+  .brand-mark{
+    width:24px;height:24px;
+    background:var(--leaf-bright);
+    clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    box-shadow:0 0 18px var(--leaf-glow);
+    flex-shrink:0;
+  }
+  .live-indicator{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:12px;color:var(--leaf-bright);
+    border:1px solid var(--leaf);padding:6px 12px;
+    background:rgba(55,198,94,.08);
+  }
+  .live-indicator .dot{
+    width:7px;height:7px;background:var(--leaf-bright);border-radius:50%;
+    animation:pulse-dot 1.6s ease-in-out infinite;
+  }
+  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--text-lo);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+  .nav-links span:hover{color:var(--leaf-bright);cursor:default;}
+  @media(max-width:760px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:1120px;margin:0 auto;padding:72px 24px 56px;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+  }
+  @media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:48px;gap:36px;}}
+
+  .kicker{
+    color:var(--leaf-bright);font-family:'Space Mono',monospace;
+    font-size:13px;letter-spacing:1.5px;margin:0 0 18px;text-transform:uppercase;
+  }
+  .kicker::before{content:"▸ ";color:var(--leaf);}
+
+  h1.title{
+    font-size:clamp(42px,6.4vw,72px);
+    line-height:.96;margin:0 0 20px;font-weight:700;letter-spacing:-.5px;
+    text-transform:uppercase;
+  }
+  h1.title em{
+    font-style:normal;color:var(--leaf-bright);
+    text-shadow:0 0 30px var(--leaf-glow), 0 0 70px rgba(125,255,168,.2);
+  }
+  .lede{
+    font-size:18px;line-height:1.55;color:var(--text-lo);max-width:46ch;margin:0 0 32px;
+  }
+  .hero-stats{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--line);width:max-content;}
+  .stat{padding:14px 24px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .n{font-size:28px;font-weight:700;color:var(--leaf-bright);font-family:'Space Mono',monospace;text-shadow:0 0 16px var(--leaf-glow);}
+  .stat .l{font-size:11px;color:var(--text-lo);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;}
+
+  .cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 28px;font-weight:700;font-size:14px;
+    border:1px solid transparent;cursor:pointer;
+    text-transform:uppercase;letter-spacing:.6px;
+    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 100%, 12px 100%);
+  }
+  .btn-primary{background:var(--leaf-bright);color:#04140a;box-shadow:0 0 26px var(--leaf-glow);}
+  .btn-primary:hover{background:#9dffc0;}
+  .btn-ghost{background:transparent;color:var(--text-hi);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--leaf);color:var(--leaf-bright);}
+
+  /* VS module */
+  .vs-module{
+    background:linear-gradient(160deg,var(--bg-2),var(--bg-1));
+    border:1px solid var(--line);
+    padding:0;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 0 60px -20px rgba(55,198,94,.25);
+  }
+  .vs-module::after{
+    content:"";position:absolute;left:0;right:0;height:120px;
+    background:linear-gradient(rgba(125,255,168,0), rgba(125,255,168,.06), rgba(125,255,168,0));
+    animation:scan 5s linear infinite;pointer-events:none;
+  }
+  .vs-top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--text-lo);
+    text-transform:uppercase;letter-spacing:.5px;
+  }
+  .vs-top .live-indicator{padding:4px 10px;font-size:11px;}
+  .vs-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:30px 18px;gap:10px;}
+  .vs-team{text-align:center;}
+  .vs-team .badge{
+    width:56px;height:56px;margin:0 auto 12px;
+    clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  .vs-team.a .badge{background:linear-gradient(135deg,var(--leaf),var(--leaf-bright));box-shadow:0 0 24px var(--leaf-glow);}
+  .vs-team.b .badge{background:linear-gradient(135deg,var(--gold-dim),var(--gold-bright));box-shadow:0 0 24px var(--gold-glow);}
+  .vs-team .name{font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.3px;}
+  .vs-team .rec{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-lo);margin-top:4px;}
+  .vs-mid{font-family:'Space Mono',monospace;color:var(--text-lo);font-size:13px;text-align:center;}
+  .vs-mid .x{font-size:22px;color:var(--text-hi);font-weight:700;display:block;margin-bottom:6px;}
+  .vs-score{display:flex;justify-content:center;gap:14px;margin-top:16px;}
+  .vs-score .n{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;}
+  .vs-score .n.lead{color:var(--leaf-bright);text-shadow:0 0 14px var(--leaf-glow);}
+  .vs-maps{
+    display:flex;gap:8px;justify-content:center;padding:0 18px 22px;
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--text-lo);
+  }
+  .vs-maps span{border:1px solid var(--line);padding:4px 9px;}
+  .vs-maps span.won{border-color:var(--leaf);color:var(--leaf-bright);}
+
+  /* ---------- SECTION HEADS ---------- */
+  section{max-width:1120px;margin:0 auto;padding:60px 24px;}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;gap:16px;flex-wrap:wrap;
+    border-left:3px solid var(--leaf);padding-left:16px;}
+  .sec-head h2{font-size:28px;margin:0;font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
+  .sec-head p{color:var(--text-lo);margin:0;font-size:14px;max-width:38ch;}
+
+  /* ---------- STANDINGS TABLE (contrast: gold HUD on dark) ---------- */
+  .table-shell{
+    border:1px solid var(--gold-dim);
+    overflow:hidden;
+    background:linear-gradient(180deg,#160f06,#0b0904);
+    box-shadow:0 0 0 1px rgba(226,166,59,.06), 0 40px 80px -40px rgba(226,166,59,.25);
+    position:relative;
+  }
+  .table-shell::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold-bright),transparent);
+    opacity:.7;
+  }
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+  thead th{
+    text-align:left;font-family:'Space Mono',monospace;font-weight:700;
+    font-size:11px;color:var(--gold-bright);
+    background:#1c1407;
+    padding:15px 18px;border-bottom:1px solid var(--gold-dim);
+    letter-spacing:.8px;text-transform:uppercase;
+  }
+  thead th.num,tbody td.num{text-align:right;}
+  tbody td{padding:16px 18px;border-bottom:1px solid #241a08;color:var(--text-hi);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr{transition:background .12s ease;}
+  tbody tr:hover{background:rgba(226,166,59,.07);}
+  tbody tr:hover .rank{color:var(--gold-bright);}
+  .rank{font-family:'Space Mono',monospace;color:var(--gold);width:34px;display:inline-block;font-weight:700;transition:color .12s ease;}
+  .rank.top{color:var(--gold-bright);text-shadow:0 0 10px var(--gold-glow);}
+  .team-cell{display:flex;align-items:center;gap:12px;}
+  .team-dot{width:10px;height:10px;clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);flex-shrink:0;}
+  .team-name{font-weight:700;letter-spacing:.2px;}
+  .team-tag{color:var(--text-lo);font-size:11px;font-family:'Space Mono',monospace;letter-spacing:.5px;}
+  .rec-w{color:var(--leaf-bright);font-family:'Space Mono',monospace;font-weight:700;}
+  .rec-l{color:var(--danger);font-family:'Space Mono',monospace;}
+  .diff-pos{color:var(--leaf-bright);font-family:'Space Mono',monospace;font-weight:700;}
+  .diff-neg{color:var(--danger);font-family:'Space Mono',monospace;}
+  .pts{font-family:'Space Mono',monospace;font-weight:700;color:var(--gold-bright);font-size:16px;text-shadow:0 0 10px var(--gold-glow);}
+  .status-pill{
+    font-size:10px;font-family:'Space Mono',monospace;padding:4px 9px;
+    text-transform:uppercase;letter-spacing:.6px;font-weight:700;
+  }
+  .status-pill.qual{background:rgba(55,198,94,.14);color:var(--leaf-bright);border:1px solid rgba(55,198,94,.4);}
+  .status-pill.elim{background:rgba(255,92,108,.1);color:var(--danger);border:1px solid rgba(255,92,108,.35);}
+  .status-pill.bubble{background:rgba(255,212,121,.12);color:var(--gold-bright);border:1px solid rgba(255,212,121,.35);}
+
+  .table-scroll{overflow-x:auto;}
+
+  /* ---------- TEAMS ---------- */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media(max-width:860px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.team-grid{grid-template-columns:1fr;}}
+  .team-card{
+    border:1px solid var(--line);padding:20px;
+    background:var(--bg-1);position:relative;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .team-card:hover{border-color:var(--leaf);transform:translateY(-2px);}
+  .team-card::before,.team-card::after{
+    content:"";position:absolute;width:10px;height:10px;
+    border-top:2px solid var(--leaf);border-left:2px solid var(--leaf);top:-1px;left:-1px;
+    opacity:0;transition:opacity .15s ease;
+  }
+  .team-card::after{
+    top:auto;left:auto;bottom:-1px;right:-1px;
+    border-top:none;border-left:none;
+    border-bottom:2px solid var(--leaf);border-right:2px solid var(--leaf);
+  }
+  .team-card:hover::before,.team-card:hover::after{opacity:1;}
+  .team-card .team-dot{width:13px;height:13px;margin-bottom:14px;}
+  .team-card h3{margin:0 0 4px;font-size:18px;text-transform:uppercase;letter-spacing:.3px;}
+  .team-card .team-tag{display:block;margin-bottom:12px;}
+  .team-card .sub{font-size:13px;color:var(--text-lo);line-height:1.5;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 24px calc(28px + env(safe-area-inset-bottom,0px));
+    max-width:1120px;margin:0 auto;
+    display:flex;justify-content:space-between;color:var(--text-lo);font-size:12px;
+    flex-wrap:wrap;gap:8px;font-family:'Space Mono',monospace;letter-spacing:.3px;
+  }
+
+  ::selection{background:var(--gold-dim);color:var(--gold-bright);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="brand-mark"></span>Verdant Clash</div>
+  <div class="live-indicator"><span class="dot"></span>LIVE NOW</div>
+  <div class="nav-links">
+    <span>Standings</span><span>Bracket</span><span>Teams</span><span>Schedule</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="kicker">Season 3 · Grand Finals Week</p>
+    <h1 class="title">Sixteen teams.<br>One <em>canopy</em>.</h1>
+    <p class="lede">The Verdant Clash regional championship runs through Sunday. Track live standings, bracket progress, and who's clinging to the last qualifying spot.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="n">16</div><div class="l">Teams left</div></div>
+      <div class="stat"><div class="n">$120K</div><div class="l">Prize pool</div></div>
+      <div class="stat"><div class="n">04</div><div class="l">Days left</div></div>
+    </div>
+    <div class="cta-row">
+      <button class="btn btn-primary">Watch live</button>
+      <button class="btn btn-ghost">Full schedule</button>
+    </div>
+  </div>
+
+  <div class="vs-module">
+    <div class="vs-top">
+      <span>Winners' semifinal</span>
+      <span class="live-indicator"><span class="dot"></span>LIVE</span>
+    </div>
+    <div class="vs-teams">
+      <div class="vs-team a">
+        <div class="badge"></div>
+        <div class="name">Moss Eight</div>
+        <div class="rec">7–1 · #1 seed</div>
+      </div>
+      <div class="vs-mid"><span class="x">VS</span>BO3</div>
+      <div class="vs-team b">
+        <div class="badge"></div>
+        <div class="name">Root &amp; Vine</div>
+        <div class="rec">6–2 · #3 seed</div>
+      </div>
+    </div>
+    <div class="vs-score">
+      <span class="n lead">1</span>
+      <span class="n" style="color:var(--text-lo)">–</span>
+      <span class="n">0</span>
+    </div>
+    <div class="vs-maps">
+      <span class="won">Canopy — W</span>
+      <span>Hollow — Live</span>
+      <span>Thicket — —</span>
+    </div>
+  </div>
+</div>
+
+<section id="standings">
+  <div class="sec-head">
+    <h2>Group standings</h2>
+    <p>Top 8 advance to playoffs. Bottom 2 are eliminated tonight.</p>
+  </div>
+
+  <div class="table-shell">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:46px;">#</th>
+            <th>Team</th>
+            <th class="num">W&nbsp;–&nbsp;L</th>
+            <th class="num">Map diff</th>
+            <th class="num">Points</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank top">01</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#63e88a"></span><div><div class="team-name">Moss Eight</div><div class="team-tag">MOS8</div></div></div></td>
+            <td class="num"><span class="rec-w">7</span> – <span class="rec-l">1</span></td>
+            <td class="num"><span class="diff-pos">+11</span></td>
+            <td class="num pts">21</td>
+            <td><span class="status-pill qual">QUALIFIED</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank top">02</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#e2a63b"></span><div><div class="team-name">Thicket</div><div class="team-tag">THK</div></div></div></td>
+            <td class="num"><span class="rec-w">7</span> – <span class="rec-l">1</span></td>
+            <td class="num"><span class="diff-pos">+9</span></td>
+            <td class="num pts">21</td>
+            <td><span class="status-pill qual">QUALIFIED</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">03</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#6ba5e8"></span><div><div class="team-name">Root &amp; Vine</div><div class="team-tag">R&amp;V</div></div></div></td>
+            <td class="num"><span class="rec-w">6</span> – <span class="rec-l">2</span></td>
+            <td class="num"><span class="diff-pos">+6</span></td>
+            <td class="num pts">18</td>
+            <td><span class="status-pill qual">QUALIFIED</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">04</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#e86bbf"></span><div><div class="team-name">Fern Row</div><div class="team-tag">FRN</div></div></div></td>
+            <td class="num"><span class="rec-w">5</span> – <span class="rec-l">3</span></td>
+            <td class="num"><span class="diff-pos">+3</span></td>
+            <td class="num pts">15</td>
+            <td><span class="status-pill qual">QUALIFIED</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">05</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#9b6be8"></span><div><div class="team-name">Hollow FC</div><div class="team-tag">HLW</div></div></div></td>
+            <td class="num"><span class="rec-w">4</span> – <span class="rec-l">4</span></td>
+            <td class="num"><span class="diff-pos">+1</span></td>
+            <td class="num pts">12</td>
+            <td><span class="status-pill bubble">BUBBLE</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">06</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#e8a56b"></span><div><div class="team-name">Canopy Nine</div><div class="team-tag">CN9</div></div></div></td>
+            <td class="num"><span class="rec-w">4</span> – <span class="rec-l">4</span></td>
+            <td class="num"><span class="diff-neg">–2</span></td>
+            <td class="num pts">12</td>
+            <td><span class="status-pill bubble">BUBBLE</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">07</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#6be8d0"></span><div><div class="team-name">Peat &amp; Smoke</div><div class="team-tag">P&amp;S</div></div></div></td>
+            <td class="num"><span class="rec-w">2</span> – <span class="rec-l">6</span></td>
+            <td class="num"><span class="diff-neg">–7</span></td>
+            <td class="num pts">6</td>
+            <td><span class="status-pill elim">ELIMINATED</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank">08</span></td>
+            <td><div class="team-cell"><span class="team-dot" style="background:#e86b6b"></span><div><div class="team-name">Underbrush</div><div class="team-tag">UBH</div></div></div></td>
+            <td class="num"><span class="rec-w">1</span> – <span class="rec-l">7</span></td>
+            <td class="num"><span class="diff-neg">–13</span></td>
+            <td class="num pts">3</td>
+            <td><span class="status-pill elim">ELIMINATED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="teams">
+  <div class="sec-head">
+    <h2>Teams to watch</h2>
+    <p>Four squads carrying the group stage into the final week.</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <span class="team-dot" style="background:#63e88a"></span>
+      <h3>Moss Eight</h3>
+      <span class="team-tag">MOS8 · Defending champions</span>
+      <p class="sub">Unbeaten in their last five. Riding the best map differential in the field.</p>
+    </div>
+    <div class="team-card">
+      <span class="team-dot" style="background:#e2a63b"></span>
+      <h3>Thicket</h3>
+      <span class="team-tag">THK · Rookie standout</span>
+      <p class="sub">Newest roster in the top four, built around a 17-year-old rifler.</p>
+    </div>
+    <div class="team-card">
+      <span class="team-dot" style="background:#6ba5e8"></span>
+      <h3>Root &amp; Vine</h3>
+      <span class="team-tag">R&amp;V · Comeback story</span>
+      <p class="sub">Missed playoffs last season. Now three wins from a rematch.</p>
+    </div>
+    <div class="team-card">
+      <span class="team-dot" style="background:#e86bbf"></span>
+      <h3>Fern Row</h3>
+      <span class="team-tag">FRN · Underdogs</span>
+      <p class="sub">Lowest budget in the top eight, highest clutch-round rate.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Verdant Clash · Season 3</span>
+  <span>Updated live during match days</span>
+</footer>
+
+</body>
+</html>

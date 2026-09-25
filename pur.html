@@ -1,0 +1,718 @@
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameHub — Arena</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+}
+
+:root {
+    --bg: #07090d;
+    --surface: #0d1218;
+    --surface-2: #111821;
+
+    --green: #10b981;
+    --green-dark: #047857;
+
+    --purple: #8b5cf6;
+    --purple-light: #a78bfa;
+
+    --cyan: #22d3ee;
+
+    --white: #f8fafc;
+    --muted: #8996a5;
+
+    --border: rgba(255,255,255,.07);
+}
+
+body {
+    min-height: 100vh;
+    color: var(--white);
+    background:
+        radial-gradient(
+            circle at 75% 15%,
+            rgba(139,92,246,.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 70%,
+            rgba(16,185,129,.10),
+            transparent 30%
+        ),
+        var(--bg);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 76px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+    background: rgba(7,9,13,.78);
+    backdrop-filter: blur(18px);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo .green {
+    color: var(--green);
+}
+
+.logo .purple {
+    color: var(--purple-light);
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    color: var(--green);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--purple)
+        );
+
+    font-weight: bold;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    width: 88%;
+    max-width: 1400px;
+    min-height: 470px;
+
+    margin: 45px auto 0;
+
+    border: 1px solid var(--border);
+    border-radius: 28px;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(16,185,129,.12),
+            rgba(139,92,246,.14),
+            rgba(0,0,0,.2)
+        );
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    right: -120px;
+    top: -150px;
+
+    background: var(--purple);
+    filter: blur(140px);
+    opacity: .15;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    padding: 80px;
+    max-width: 700px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    border-radius: 50px;
+
+    background: rgba(16,185,129,.08);
+    border: 1px solid rgba(16,185,129,.2);
+
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.badge span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+}
+
+h1 {
+    margin-top: 25px;
+
+    font-size: clamp(48px, 7vw, 82px);
+    line-height: .92;
+    letter-spacing: -4px;
+}
+
+h1 .green {
+    color: var(--green);
+}
+
+h1 .purple {
+    color: var(--purple-light);
+}
+
+.description {
+    margin-top: 25px;
+
+    max-width: 570px;
+
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* ================= BUTTONS ================= */
+
+.actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.btn {
+    padding: 14px 22px;
+    border-radius: 11px;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: .3s;
+}
+
+.btn-primary {
+    color: #03100b;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            #34d399
+        );
+
+    box-shadow:
+        0 10px 30px rgba(16,185,129,.18);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 15px 40px rgba(16,185,129,.35);
+}
+
+.btn-secondary {
+    color: var(--white);
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+}
+
+/* ================= CONTENT ================= */
+
+.container {
+    width: 88%;
+    max-width: 1400px;
+    margin: 45px auto;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    font-size: 24px;
+}
+
+.section-title a {
+    color: var(--green);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* ================= GAME CARDS ================= */
+
+.games {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.card {
+    padding: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.015)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 19px;
+
+    transition: .35s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(139,92,246,.45);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35),
+        0 0 30px rgba(139,92,246,.08);
+}
+
+.game-cover {
+    height: 180px;
+
+    border-radius: 13px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 55px;
+
+    margin-bottom: 17px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.cover-one {
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            #8b5cf6,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #064e3b,
+            #111827
+        );
+}
+
+.cover-two {
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #22d3ee,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #172554,
+            #0f172a
+        );
+}
+
+.cover-three {
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            #a78bfa,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #312e81,
+            #052e16
+        );
+}
+
+.card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 16px;
+}
+
+.players {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.play {
+    padding: 8px 13px;
+
+    border-radius: 8px;
+
+    color: white;
+    background: rgba(139,92,246,.15);
+
+    border: 1px solid rgba(139,92,246,.25);
+
+    font-size: 12px;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    margin-top: 35px;
+
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.stat {
+    padding: 22px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+.stat small {
+    color: var(--muted);
+}
+
+.stat strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 27px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--green),
+            var(--purple-light)
+        );
+
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-content {
+        padding: 55px 35px;
+    }
+
+    .games {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 500px) {
+
+    .hero {
+        width: 94%;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        text-align: center;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span class="green">GAME</span><span class="purple">HUB</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#" class="active">Arena</a>
+        <a href="#">Games</a>
+        <a href="#">Players</a>
+        <a href="#">Tournaments</a>
+        <a href="#">Leaderboard</a>
+    </div>
+
+    <div class="avatar">K</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            <span></span>
+            Arena Online
+        </div>
+
+        <h1>
+            ENTER THE<br>
+            <span class="green">GREEN</span>
+            <span class="purple">VOID.</span>
+        </h1>
+
+        <p class="description">
+            Find your next challenge, build your squad,
+            compete against players and climb through
+            the competitive gaming arena.
+        </p>
+
+        <div class="actions">
+            <a href="#" class="btn btn-primary">
+                Enter Arena →
+            </a>
+
+            <a href="#" class="btn btn-secondary">
+                Explore Games
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED GAMES -->
+
+<section class="container">
+
+    <div class="section-title">
+
+        <h2>Featured Games</h2>
+
+        <a href="#">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="games">
+
+        <div class="card">
+
+            <div class="game-cover cover-one">
+                ⚔️
+            </div>
+
+            <h3>Shadow Protocol</h3>
+
+            <p>
+                Tactical multiplayer combat
+                inside a futuristic arena.
+            </p>
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 18.4K Online
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="game-cover cover-two">
+                🚀
+            </div>
+
+            <h3>Neon Velocity</h3>
+
+            <p>
+                High-speed racing through
+                futuristic neon cities.
+            </p>
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 12.8K Online
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="game-cover cover-three">
+                👾
+            </div>
+
+            <h3>Void Hunters</h3>
+
+            <p>
+                Squad-based survival against
+                unknown cosmic enemies.
+            </p>
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 9.6K Online
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>Active Players</small>
+            <strong>48.2K</strong>
+        </div>
+
+        <div class="stat">
+            <small>Games</small>
+            <strong>184</strong>
+        </div>
+
+        <div class="stat">
+            <small>Matches Today</small>
+            <strong>126K</strong>
+        </div>
+
+        <div class="stat">
+            <small>Prize Pool</small>
+            <strong>$2.8M</strong>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

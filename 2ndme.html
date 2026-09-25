@@ -1,0 +1,1211 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GREEN//CORE</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    /* GREEN COLOR SPECTRUM */
+
+    --forest: #06110D;
+    --deep-green: #0B241A;
+    --dark-emerald: #064E3B;
+
+    --emerald: #10B981;
+    --teal: #14B8A6;
+
+    --mint: #6EE7B7;
+
+    --cyan-teal: #22D3EE;
+    --blue-green: #38BDF8;
+
+    --lime: #A3E635;
+
+    --white: #F0FDF4;
+    --muted: #8BA99D;
+
+    --border: rgba(110, 231, 183, .12);
+}
+
+body {
+
+    min-height: 100vh;
+
+    color: var(--white);
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(16,185,129,.14),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(20,184,166,.10),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(34,211,238,.07),
+            transparent 30%
+        ),
+
+        var(--forest);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    height: 76px;
+
+    padding: 0 6%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+    background:
+        rgba(6,17,13,.78);
+
+    backdrop-filter: blur(20px);
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+.logo {
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+.logo span {
+
+    color: var(--emerald);
+
+}
+
+.logo small {
+
+    color: var(--mint);
+
+    font-size: 9px;
+
+    margin-left: 5px;
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    gap: 28px;
+
+}
+
+.nav-links a {
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: .3s;
+
+}
+
+.nav-links a:hover,
+.nav-links .active {
+
+    color: var(--mint);
+
+}
+
+
+.online {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    color: var(--teal);
+
+}
+
+.online i {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--lime);
+
+    box-shadow:
+        0 0 12px var(--lime);
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    width: 88%;
+
+    max-width: 1450px;
+
+    min-height: 530px;
+
+    margin:
+        45px auto;
+
+    padding: 70px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid var(--border);
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(11,36,26,.95),
+            rgba(6,78,59,.55),
+            rgba(6,17,13,.95)
+        );
+
+}
+
+
+/* GREEN LIGHT EFFECT */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    right: -150px;
+
+    top: -180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(16,185,129,.28),
+            transparent 65%
+        );
+
+    filter: blur(30px);
+
+}
+
+
+/* CYAN EDGE */
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+
+    height: 280px;
+
+    right: 12%;
+
+    bottom: -160px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(34,211,238,.08);
+
+    filter: blur(60px);
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 720px;
+
+}
+
+
+.eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(16,185,129,.08);
+
+    border:
+        1px solid
+        rgba(110,231,183,.16);
+
+    color:
+        var(--mint);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.eyebrow span {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--lime);
+
+}
+
+
+h1 {
+
+    margin-top: 25px;
+
+    font-size:
+        clamp(50px, 7vw, 92px);
+
+    line-height: .88;
+
+    letter-spacing: -5px;
+
+}
+
+
+h1 .green {
+
+    color: var(--emerald);
+
+}
+
+h1 .mint {
+
+    color: var(--mint);
+
+}
+
+h1 .cyan {
+
+    color: var(--cyan-teal);
+
+}
+
+
+.hero p {
+
+    max-width: 580px;
+
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    font-size: 16px;
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions {
+
+    display: flex;
+
+    gap: 13px;
+
+    margin-top: 30px;
+
+}
+
+
+.btn {
+
+    padding:
+        14px 22px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    transition: .3s;
+
+}
+
+
+.primary {
+
+    color: #03110A;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--emerald),
+            var(--mint)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(16,185,129,.20);
+
+}
+
+
+.primary:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 40px
+        rgba(16,185,129,.38);
+
+}
+
+
+.secondary {
+
+    color: var(--mint);
+
+    background:
+        rgba(110,231,183,.04);
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+
+.secondary:hover {
+
+    border-color:
+        var(--teal);
+
+    background:
+        rgba(20,184,166,.08);
+
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.container {
+
+    width: 88%;
+
+    max-width: 1450px;
+
+    margin:
+        60px auto;
+
+}
+
+
+.section-head {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        22px;
+
+}
+
+
+.section-head h2 {
+
+    font-size: 25px;
+
+}
+
+
+.section-head a {
+
+    color:
+        var(--teal);
+
+    text-decoration:
+        none;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   GAME GRID
+========================= */
+
+.games {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.card {
+
+    padding: 15px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(11,36,26,.8),
+            rgba(6,17,13,.85)
+        );
+
+    transition: .35s;
+
+}
+
+
+.card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(110,231,183,.3);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.35);
+
+}
+
+
+/* DIFFERENT GREEN-BASED CARD COLORS */
+
+.cover {
+
+    height: 175px;
+
+    border-radius: 14px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 50px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.cover.one {
+
+    background:
+
+        radial-gradient(
+            circle at 70% 30%,
+            var(--mint),
+            transparent 22%
+        ),
+
+        linear-gradient(
+            135deg,
+            var(--dark-emerald),
+            var(--deep-green)
+        );
+
+}
+
+
+.cover.two {
+
+    background:
+
+        radial-gradient(
+            circle at 30% 30%,
+            var(--cyan-teal),
+            transparent 24%
+        ),
+
+        linear-gradient(
+            135deg,
+            #075985,
+            var(--dark-emerald)
+        );
+
+}
+
+
+.cover.three {
+
+    background:
+
+        radial-gradient(
+            circle at 70% 35%,
+            var(--lime),
+            transparent 20%
+        ),
+
+        linear-gradient(
+            135deg,
+            #365314,
+            var(--deep-green)
+        );
+
+}
+
+
+.card h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.card p {
+
+    color:
+        var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+.card-bottom {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-top:
+        17px;
+
+}
+
+
+.players {
+
+    color:
+        var(--teal);
+
+    font-size:
+        11px;
+
+}
+
+
+.play {
+
+    padding:
+        7px 12px;
+
+    border-radius:
+        8px;
+
+    color:
+        var(--mint);
+
+    background:
+        rgba(16,185,129,.08);
+
+    border:
+        1px solid
+        rgba(16,185,129,.15);
+
+    font-size:
+        10px;
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+
+    margin-top:
+        35px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:
+        14px;
+
+}
+
+
+.stat {
+
+    padding:
+        23px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(11,36,26,.55);
+
+    border:
+        1px solid var(--border);
+
+}
+
+
+.stat small {
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+
+}
+
+
+.stat strong {
+
+    display:
+        block;
+
+    margin-top:
+        9px;
+
+    font-size:
+        29px;
+
+    color:
+        var(--mint);
+
+}
+
+
+.stat:nth-child(2) strong {
+
+    color:
+        var(--teal);
+
+}
+
+
+.stat:nth-child(3) strong {
+
+    color:
+        var(--cyan-teal);
+
+}
+
+
+.stat:nth-child(4) strong {
+
+    color:
+        var(--lime);
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+    .hero {
+
+        width: 94%;
+
+        padding:
+            55px 35px;
+
+    }
+
+    .container {
+
+        width: 94%;
+
+    }
+
+    .games {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width: 500px) {
+
+    h1 {
+
+        font-size:
+            50px;
+
+        letter-spacing:
+            -2px;
+
+    }
+
+    .actions {
+
+        flex-direction:
+            column;
+
+    }
+
+    .btn {
+
+        text-align:
+            center;
+
+    }
+
+    .stats {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span>GREEN</span>//CORE
+
+        <small>GAMING</small>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#" class="active">
+            Home
+        </a>
+
+        <a href="#">
+            Games
+        </a>
+
+        <a href="#">
+            Arena
+        </a>
+
+        <a href="#">
+            Rankings
+        </a>
+
+        <a href="#">
+            Community
+        </a>
+
+    </div>
+
+
+    <div class="online">
+
+        <i></i>
+
+        24K Online
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+
+            <span></span>
+
+            SYSTEM ONLINE
+
+        </div>
+
+
+        <h1>
+
+            PLAY IN THE
+
+            <br>
+
+            <span class="green">
+                GREEN
+            </span>
+
+            <span class="mint">
+                ZONE
+            </span>
+
+            <span class="cyan">
+                .
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Enter a competitive gaming universe built
+            around your squad. Discover new games,
+            track your progress and challenge players
+            from around the world.
+
+        </p>
+
+
+        <div class="actions">
+
+            <a href="#" class="btn primary">
+
+                ENTER ARENA →
+
+            </a>
+
+
+            <a href="#" class="btn secondary">
+
+                EXPLORE GAMES
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= GAMES ================= -->
+
+<section class="container">
+
+    <div class="section-head">
+
+        <h2>
+            Trending Now
+        </h2>
+
+        <a href="#">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="games">
+
+
+        <div class="card">
+
+            <div class="cover one">
+                ⚔️
+            </div>
+
+            <h3>
+                Emerald Strike
+            </h3>
+
+            <p>
+                Tactical squad combat
+                inside a futuristic world.
+            </p>
+
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 18.4K PLAYERS
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="cover two">
+                🚀
+            </div>
+
+            <h3>
+                Neon Circuit
+            </h3>
+
+            <p>
+                High-speed competitive
+                racing across neon cities.
+            </p>
+
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 12.8K PLAYERS
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="cover three">
+                👾
+            </div>
+
+            <h3>
+                Wild Sector
+            </h3>
+
+            <p>
+                Explore dangerous worlds
+                and survive the unknown.
+            </p>
+
+
+            <div class="card-bottom">
+
+                <span class="players">
+                    ● 9.6K PLAYERS
+                </span>
+
+                <span class="play">
+                    PLAY
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <small>
+                ACTIVE PLAYERS
+            </small>
+
+            <strong>
+                48.2K
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>
+                GAMES
+            </small>
+
+            <strong>
+                184
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>
+                MATCHES TODAY
+            </small>
+
+            <strong>
+                126K
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <small>
+                TOURNAMENT POOL
+            </small>
+
+            <strong>
+                $2.8M
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>
+```
