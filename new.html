@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DualSpace — Responsive Dual Theme</title>
+
+<style>
+
+/* =========================================================
+   COLOR SYSTEM
+========================================================= */
+
+:root {
+
+    /* ===== CRIMSON THEME ===== */
+
+    --bg: #EEEAD7;
+    --surface: #FFFFFF;
+    --surface-2: #F5F1DF;
+
+    --primary: #6D0808;
+    --primary-dark: #2D0000;
+    --secondary: #757D6F;
+
+    --text: #2D0000;
+    --text-soft: #757D6F;
+
+    --border: rgba(45, 0, 0, .13);
+
+
+    /* ===== ADDITIONAL ACCENTS ===== */
+
+    --accent-coral: #FFB6A6;
+    --accent-peach: #FFEBD3;
+    --accent-mint: #9BCEC1;
+    --accent-blue: #67A2C5;
+
+
+    /* ===== SYSTEM ===== */
+
+    --shadow:
+        0 15px 40px rgba(45, 0, 0, .12);
+
+    --radius: 22px;
+
+    --transition:
+        260ms cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================================
+   MIDNIGHT THEME
+========================================================= */
+
+#theme-toggle:checked ~ .page {
+
+    --bg: #010736;
+    --surface: #0D1C42;
+    --surface-2: #22396F;
+
+    --primary: #22396F;
+    --primary-dark: #010736;
+    --secondary: #FCF1D0;
+
+    --text: #FCF1D0;
+    --text-soft: #B8C0DC;
+
+    --border: rgba(252, 241, 208, .13);
+
+    --shadow:
+        0 15px 45px rgba(0, 0, 0, .35);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 280px;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--bg);
+
+    overflow-x: hidden;
+}
+
+button,
+a,
+label {
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#theme-toggle {
+    display: none;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+
+    transition:
+        background var(--transition),
+        color var(--transition);
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    height: 76px;
+
+    background: color-mix(
+        in srgb,
+        var(--bg) 95%,
+        transparent
+    );
+
+    border-bottom:
+        1px solid var(--border);
+
+    backdrop-filter: none;
+
+    transition:
+        background var(--transition),
+        border-color var(--transition);
+}
+
+.nav-inner {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    height: 100%;
+
+    margin-inline: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    letter-spacing: -.7px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.logo-mark {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: var(--primary);
+
+    color: var(--secondary);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-coral) 50%,
+            transparent
+        );
+
+    transition:
+        transform var(--transition);
+}
+
+.logo:hover .logo-mark {
+    transform:
+        rotate(-6deg)
+        scale(1.05);
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: clamp(18px, 3vw, 34px);
+}
+
+.nav-links a {
+
+    position: relative;
+
+    color: var(--text-soft);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        color var(--transition),
+        transform var(--transition);
+}
+
+.nav-links a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -9px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--primary);
+
+    transform: translateX(-50%);
+
+    transition:
+        width var(--transition);
+}
+
+.nav-links a:hover {
+
+    color: var(--text);
+
+    transform: translateY(-2px);
+}
+
+.nav-links a:hover::after {
+    width: 18px;
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-control {
+    flex-shrink: 0;
+}
+
+.theme-label {
+
+    width: 66px;
+    height: 34px;
+
+    padding: 4px;
+
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    background: var(--primary);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-peach) 50%,
+            transparent
+        );
+}
+
+.toggle-circle {
+
+    width: 26px;
+    height: 26px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--bg);
+
+    color: var(--primary);
+
+    transform: translateX(0);
+
+    transition:
+        transform var(--transition),
+        background var(--transition);
+}
+
+#theme-toggle:checked ~ .page
+.toggle-circle {
+    transform: translateX(32px);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    min-height: 650px;
+
+    margin-inline: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(320px, .95fr);
+
+    align-items: center;
+
+    gap: clamp(40px, 7vw, 80px);
+}
+
+.hero-content {
+    padding: 80px 0;
+}
+
+.eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 7px 12px;
+
+    margin-bottom: 20px;
+
+    border-radius: 999px;
+
+    background: var(--surface);
+
+    color: var(--primary);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-mint) 55%,
+            var(--border)
+        );
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.hero h1 {
+
+    max-width: 720px;
+
+    font-size:
+        clamp(46px, 7vw, 78px);
+
+    line-height: .92;
+
+    letter-spacing: -4px;
+
+    overflow-wrap: break-word;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero-description {
+
+    max-width: 570px;
+
+    margin-top: 25px;
+
+    color: var(--text-soft);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 32px;
+}
+
+.btn {
+
+    min-height: 48px;
+
+    padding:
+        0 23px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        color var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.btn-primary {
+
+    background: var(--primary);
+
+    color: var(--secondary);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-peach) 40%,
+            transparent
+        );
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.12);
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-4px);
+
+    border-color:
+        var(--accent-coral);
+
+    box-shadow:
+        0 15px 28px rgba(0,0,0,.18);
+}
+
+.btn-secondary {
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-blue) 55%,
+            var(--border)
+        );
+}
+
+.btn-secondary:hover {
+
+    background: var(--surface-2);
+
+    border-color:
+        var(--accent-coral);
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.hero-visual {
+
+    min-height: 500px;
+
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+
+    min-width: 0;
+}
+
+.visual-main {
+
+    width: min(
+        390px,
+        90%
+    );
+
+    height: 450px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 40px;
+
+    background: var(--primary);
+
+    border:
+        2px solid
+        color-mix(
+            in srgb,
+            var(--accent-mint) 45%,
+            transparent
+        );
+
+    box-shadow: var(--shadow);
+
+    transform: rotate(4deg);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.visual-main:hover {
+
+    transform:
+        rotate(1deg)
+        translateY(-8px);
+}
+
+.visual-main::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    right: -100px;
+    top: -80px;
+
+    border-radius: 50%;
+
+    background: var(--secondary);
+
+    opacity: .18;
+}
+
+.visual-main::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 210px;
+    height: 210px;
+
+    left: -90px;
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background: var(--accent-blue);
+
+    opacity: .22;
+}
+
+.visual-content {
+
+    position: absolute;
+
+    left: 38px;
+    right: 38px;
+    bottom: 40px;
+
+    color: var(--secondary);
+}
+
+.visual-number {
+
+    font-size:
+        clamp(80px, 10vw, 110px);
+
+    font-weight: 950;
+
+    line-height: .8;
+
+    color: var(--accent-peach);
+
+    opacity: .9;
+}
+
+.visual-content h3 {
+
+    max-width: 290px;
+
+    margin-top: 30px;
+
+    font-size:
+        clamp(23px, 3vw, 28px);
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    margin-inline: auto;
+
+    padding:
+        clamp(65px, 9vw, 100px) 0;
+}
+
+.section-header {
+
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+.section-header h2 {
+
+    font-size:
+        clamp(34px, 5vw, 52px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.section-header p {
+
+    max-width: 450px;
+
+    color: var(--text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+
+    min-height: 270px;
+
+    padding: 28px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.card:nth-child(1) {
+    border-color:
+        color-mix(
+            in srgb,
+            var(--accent-coral) 55%,
+            var(--border)
+        );
+}
+
+.card:nth-child(2) {
+    border-color:
+        color-mix(
+            in srgb,
+            var(--accent-mint) 55%,
+            var(--border)
+        );
+}
+
+.card:nth-child(3) {
+    border-color:
+        color-mix(
+            in srgb,
+            var(--accent-blue) 55%,
+            var(--border)
+        );
+}
+
+.card:hover {
+
+    transform: translateY(-8px);
+
+    background: var(--surface-2);
+
+    border-color:
+        var(--accent-mint);
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,.16);
+}
+
+.card-icon {
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 35px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 14px;
+
+    background: var(--primary);
+
+    color: var(--secondary);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-peach) 45%,
+            transparent
+        );
+
+    font-size: 20px;
+}
+
+.card h3 {
+
+    margin-bottom: 12px;
+
+    font-size: 22px;
+}
+
+.card p {
+
+    color: var(--text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SHOWCASE
+========================================================= */
+
+.showcase {
+
+    background: var(--primary-dark);
+
+    color: var(--secondary);
+}
+
+.showcase-inner {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    min-height: 460px;
+
+    margin-inline: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, 1fr);
+
+    align-items: center;
+
+    gap: 80px;
+}
+
+.showcase h2 {
+
+    max-width: 650px;
+
+    font-size:
+        clamp(40px, 6vw, 65px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+}
+
+.showcase p {
+
+    max-width: 500px;
+
+    margin: 25px 0;
+
+    color:
+        color-mix(
+            in srgb,
+            var(--secondary) 65%,
+            transparent
+        );
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SHOWCASE ART
+========================================================= */
+
+.showcase-art {
+
+    height: 330px;
+
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+}
+
+.art-card {
+
+    width: 280px;
+    height: 340px;
+
+    position: relative;
+
+    border:
+        4px solid var(--accent-mint);
+
+    border-radius: 30px;
+
+    background: var(--secondary);
+
+    transform: rotate(-8deg);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition);
+}
+
+.art-card:hover {
+
+    transform:
+        rotate(-3deg)
+        translateY(-8px);
+
+    border-color:
+        var(--accent-coral);
+}
+
+.art-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: 70px;
+    left: 50%;
+
+    border:
+        10px solid var(--accent-peach);
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    transform: translateX(-50%);
+}
+
+.art-card::after {
+
+    content: "01";
+
+    position: absolute;
+
+    left: 28px;
+    bottom: 25px;
+
+    color: var(--primary);
+
+    font-size: 35px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    margin-inline: auto;
+
+    padding:
+        clamp(55px, 8vw, 70px) 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.stat {
+
+    min-width: 0;
+
+    padding: 28px;
+
+    border-left:
+        3px solid var(--accent-blue);
+
+    transition:
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.stat:hover {
+
+    border-left-color:
+        var(--accent-coral);
+
+    transform:
+        translateX(4px);
+}
+
+.stat strong {
+
+    display: block;
+
+    color: var(--primary);
+
+    font-size:
+        clamp(34px, 4vw, 45px);
+
+    line-height: 1;
+}
+
+.stat span {
+
+    display: block;
+
+    margin-top: 10px;
+
+    color: var(--text-soft);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+
+    width: min(
+        1200px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        0 auto
+        clamp(60px, 10vw, 100px);
+
+    padding:
+        clamp(35px, 6vw, 60px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    background: var(--surface);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--accent-mint) 50%,
+            var(--border)
+        );
+
+    border-radius: 32px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        border-color var(--transition);
+}
+
+.cta:hover {
+    border-color: var(--accent-blue);
+}
+
+.cta h2 {
+
+    max-width: 650px;
+
+    font-size:
+        clamp(32px, 5vw, 52px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.cta p {
+
+    margin-top: 12px;
+
+    color: var(--text-soft);
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    padding: 35px 20px;
+
+    background: var(--primary-dark);
+
+    color: var(--secondary);
+
+    border-top:
+        2px solid
+        color-mix(
+            in srgb,
+            var(--accent-blue) 40%,
+            transparent
+        );
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .nav-links {
+        gap: 18px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .hero {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(280px, .8fr);
+
+        gap: 35px;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .showcase-inner {
+        gap: 45px;
+    }
+}
+
+
+/* =========================================================
+   TABLET / LARGE MOBILE
+========================================================= */
+
+@media (max-width: 820px) {
+
+    .navbar {
+        height: 70px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+        padding-top: 50px;
+    }
+
+    .hero-content {
+        padding: 40px 0 20px;
+    }
+
+    .hero-description {
+        max-width: 650px;
+    }
+
+    .hero-visual {
+        min-height: 440px;
+    }
+
+    .visual-main {
+        width: 350px;
+        height: 410px;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .showcase-inner {
+
+        grid-template-columns: 1fr;
+
+        padding:
+            80px 0;
+    }
+
+    .showcase-art {
+        min-height: 330px;
+    }
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .cta {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .container,
+    .nav-inner,
+    .hero,
+    .section,
+    .stats,
+    .showcase-inner {
+
+        width:
+            calc(100% - 28px);
+    }
+
+    .navbar {
+        height: 64px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .logo-mark {
+
+        width: 34px;
+        height: 34px;
+
+        border-radius: 10px;
+    }
+
+    .theme-label {
+
+        width: 60px;
+        height: 32px;
+    }
+
+    #theme-toggle:checked ~ .page
+    .toggle-circle {
+        transform: translateX(28px);
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding-top: 25px;
+    }
+
+    .hero-content {
+        padding: 45px 0 10px;
+    }
+
+    .hero h1 {
+
+        font-size:
+            clamp(42px, 14vw, 58px);
+
+        letter-spacing: -3px;
+    }
+
+    .hero-description {
+
+        margin-top: 20px;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .hero-visual {
+
+        min-height: 390px;
+    }
+
+    .visual-main {
+
+        width:
+            min(310px, 86vw);
+
+        height:
+            min(380px, 105vw);
+
+        border-radius: 30px;
+    }
+
+    .visual-content {
+
+        left: 25px;
+        right: 25px;
+        bottom: 28px;
+    }
+
+    .visual-number {
+        font-size: 82px;
+    }
+
+    .visual-content h3 {
+        font-size: 23px;
+    }
+
+
+    /* SECTION */
+
+    .section {
+        padding:
+            65px 0;
+    }
+
+    .section-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .section-header h2 {
+
+        font-size:
+            clamp(34px, 11vw, 46px);
+    }
+
+
+    /* CARDS */
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: auto;
+        padding: 24px;
+    }
+
+
+    /* SHOWCASE */
+
+    .showcase-inner {
+
+        padding:
+            65px 0;
+    }
+
+    .showcase h2 {
+
+        font-size:
+            clamp(40px, 13vw, 58px);
+
+        letter-spacing: -2.5px;
+    }
+
+    .showcase-art {
+        height: 300px;
+    }
+
+    .art-card {
+
+        width: 230px;
+        height: 290px;
+    }
+
+    .art-card::before {
+
+        width: 145px;
+        height: 145px;
+
+        top: 60px;
+    }
+
+
+    /* STATS */
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+
+        padding:
+            55px 0;
+    }
+
+    .stat {
+        padding: 20px;
+    }
+
+    .stat strong {
+        font-size: 32px;
+    }
+
+    .stat span {
+        font-size: 11px;
+    }
+
+
+    /* CTA */
+
+    .cta {
+
+        width:
+            calc(100% - 28px);
+
+        padding: 32px;
+
+        margin-bottom: 60px;
+
+        border-radius: 24px;
+    }
+
+    .cta h2 {
+
+        font-size:
+            clamp(32px, 11vw, 46px);
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .nav-inner {
+        width: calc(100% - 20px);
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .logo-mark {
+        width: 31px;
+        height: 31px;
+    }
+
+    .theme-label {
+        width: 55px;
+        height: 30px;
+    }
+
+    #theme-toggle:checked ~ .page
+    .toggle-circle {
+        transform: translateX(25px);
+    }
+
+    .hero,
+    .section,
+    .stats,
+    .showcase-inner {
+        width: calc(100% - 20px);
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .visual-main {
+        width: 275px;
+        height: 350px;
+    }
+
+    .visual-number {
+        font-size: 70px;
+    }
+
+    .stats {
+        gap: 4px;
+    }
+
+    .stat {
+        padding: 16px 12px;
+    }
+
+    .stat strong {
+        font-size: 28px;
+    }
+
+    .cta {
+        width: calc(100% - 20px);
+        padding: 26px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior: auto !important;
+
+        transition-duration:
+            .01ms !important;
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     CSS THEME SWITCH
+========================================================= -->
+
+<input
+    type="checkbox"
+    id="theme-toggle"
+>
+
+
+<div class="page">
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="navbar">
+
+    <div class="nav-inner">
+
+        <a href="#" class="logo">
+
+            <div class="logo-mark">
+                ◆
+            </div>
+
+            Dual<span>Space</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#explore">
+                Explore
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </nav>
+
+
+        <div class="theme-control">
+
+            <label
+                for="theme-toggle"
+                class="theme-label"
+                aria-label="Switch theme"
+            >
+
+                <div class="toggle-circle">
+                    ☀
+                </div>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main id="home">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Dual Theme Experience
+        </div>
+
+        <h1>
+            One Interface.
+            <span>Two Worlds.</span>
+        </h1>
+
+        <p class="hero-description">
+
+            A flexible interface designed around two
+            carefully balanced visual identities.
+            Switch between a warm crimson atmosphere
+            and a deep midnight blue environment
+            instantly.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#features"
+                class="btn btn-primary"
+            >
+                Explore Interface →
+            </a>
+
+            <a
+                href="#explore"
+                class="btn btn-secondary"
+            >
+                Discover More
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="visual-main">
+
+            <div class="visual-content">
+
+                <div class="visual-number">
+                    02
+                </div>
+
+                <h3>
+                    Color systems
+                    that feel intentional.
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section
+    class="section"
+    id="features"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <div class="eyebrow">
+                Design System
+            </div>
+
+            <h2>
+                Built around contrast.
+            </h2>
+
+        </div>
+
+        <p>
+            Every surface, border and accent changes
+            with the active theme while maintaining
+            the same structure.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <article class="card">
+
+            <div class="card-icon">
+                ◈
+            </div>
+
+            <h3>
+                Crimson
+            </h3>
+
+            <p>
+                A warm and dramatic palette built
+                around deep crimson, muted olive-grey
+                and a soft parchment background.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="card-icon">
+                ◉
+            </div>
+
+            <h3>
+                Midnight
+            </h3>
+
+            <p>
+                A deep blue interface using navy
+                surfaces, royal blue accents and
+                warm cream typography.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="card-icon">
+                ↗
+            </div>
+
+            <h3>
+                One System
+            </h3>
+
+            <p>
+                Components stay consistent while
+                colors, contrast and atmosphere change
+                automatically.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SHOWCASE
+========================================================= -->
+
+<section
+    class="showcase"
+    id="explore"
+>
+
+    <div class="showcase-inner">
+
+        <div>
+
+            <div class="eyebrow">
+                Visual Identity
+            </div>
+
+            <h2>
+                Switch the
+                atmosphere.
+            </h2>
+
+            <p>
+                Try the toggle in the top-right corner.
+                The entire interface transforms without
+                changing its underlying layout.
+            </p>
+
+
+            <label
+                for="theme-toggle"
+                class="btn btn-secondary"
+            >
+                Switch Theme ↗
+            </label>
+
+        </div>
+
+
+        <div class="showcase-art">
+
+            <div class="art-card"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <strong>
+            02
+        </strong>
+
+        <span>
+            Complete Themes
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            08
+        </strong>
+
+        <span>
+            Core Colors
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            01
+        </strong>
+
+        <span>
+            Shared Design System
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            ∞
+        </strong>
+
+        <span>
+            Possible Interfaces
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section
+    class="cta"
+    id="about"
+>
+
+    <div>
+
+        <div class="eyebrow">
+            Ready
+        </div>
+
+        <h2>
+            Choose your atmosphere.
+        </h2>
+
+        <p>
+            Switch between Crimson and Midnight
+            whenever you want.
+        </p>
+
+    </div>
+
+
+    <label
+        for="theme-toggle"
+        class="btn btn-primary"
+    >
+        Toggle Theme →
+    </label>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    DualSpace — Dual Theme Interface
+
+</footer>
+
+
+</div>
+
+</body>
+</html>
